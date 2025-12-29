@@ -1,0 +1,174 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background: white;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    color: #e0e0e0;
+}
+
+/* Top Corner "KONAMI" Box */
+.top-corner-box {
+    align-self: flex-start;
+    margin-left: 20px;
+    background-color: white;
+    padding: 5px 15px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+.konami-red {
+    color: #e2001a; /* Konami Red */
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+/* Main Login Container */
+.login-container {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    width: 90%;
+    max-width: 420px;
+    margin: 40px auto;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.logo-box {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.logo-placeholder {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #111;
+}
+
+/* Form & Input Fields */
+.input-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+.input-group input {
+    width: 100%;
+    padding: 15px;
+    background: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.3s;
+}
+.input-group input:focus {
+    border-color: #e2001a;
+}
+.input-group label {
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    background: white;
+    padding: 0 5px;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Buttons */
+.btn-login, .btn-google {
+  background-color: #e2001a;
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+.btn-login {
+    background-color: #e2001a; /* Konami Red */
+    color: white;
+}
+.btn-login:hover {
+    background-color: #c40016;
+}
+
+.btn-google {
+    background-color: #f5f5f5;
+    color: #333;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.google-icon {
+    margin-right: 10px;
+    font-weight: bold;
+}
+.btn-google:hover {
+    background-color: #e8e8e8;
+}
+
+/* Divider */
+.divider {
+    text-align: center;
+    margin: 20px 0;
+    color: #999;
+    position: relative;
+}
+.divider::before, .divider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 42%;
+    height: 1px;
+    background-color: #ddd;
+}
+.divider::before { left: 0; }
+.divider::after { right: 0; }
+
+/* Links */
+.register-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}
+.register-red {
+    color: #e2001a;
+    text-decoration: none;
+    font-weight: 500;
+}
+.register-red:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.page-footer {
+    margin-top: auto;
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+.footer-links a {
+    color: #aaa;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+.footer-links a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
