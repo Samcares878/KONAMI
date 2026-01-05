@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>eFootball 100M Download Campaign</title>
+  <style>
+    :root {
+      --blue: #0b2dbf;
+      --yellow: #ffea00;
+      --pink: #ff2f92;
+      --dark: #0a0a0a;
+    }
+    
+    * {
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /* FIXED: Background image with proper properties */
+    body {
+      margin: 0;
+      background-image: url('1767569060635.jpg'); /* Fixed: Ensure correct extension */
+      background-size: cover;               /* Makes image cover entire screen */
+      background-repeat: no-repeat;         /* Prevents tiling */
+      background-position: center;          /* Centers the image */
+      background-attachment: fixed;         /* Keeps image fixed during scroll */
+      color: #0b2dbf;
+      min-height: 100vh;
+    }
+
+    /* Alternative if Image_1.jpg doesn't work:
+    body {
+      background: url('Image_1.jpg') center/cover no-repeat fixed;
+    }
+    */
+
+    .wrapper {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    /* HEADER (from image 1) */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #000;
+      padding: 14px 20px;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--yellow);
+    }
+
+    .download-btn {
+      background: var(--pink);
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* MAIN CAMPAIGN SECTION */
+    .campaign {
+      margin-top: 20px;
+      background: radial-gradient(circle at top, #fff7cc, #f0c76b);
+      border-radius: 16px;
+      padding: 30px;
+      color: #000;
+    }
+
+    .campaign h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 36px;
+      font-weight: 900;
+    }
+
+    .campaign-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      justify-items: center;
+    }
+
+    /* IMAGE STYLING */
+    .campaign-image {
+      width: 80vw;
+      max-width: 900px;
+      height: 70vh;
+      max-height: 600px;
+      object-fit: contain;
+      margin-bottom: 30px;
+    }
+
+    /* PINK CLAIM BUTTON - NOW A LINK */
+    .claim-btn {
+      display: block;
+      margin: 20px auto 40px;
+      background-color: var(--pink);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      font-size: 20px;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(255, 47, 146, 0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none; /* Remove underline from link */
+      text-align: center;
+      max-width: 300px;
+    }
+
+    .claim-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(255, 47, 146, 0.4);
+      color: white; /* Ensure text stays white on hover */
+    }
+
+    /* CONTENT SECTION */
+    .content-section {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 14px;
+      padding: 30px;
+      margin-top: 20px;
+      color: #333;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .content-section h2 {
+      color: var(--blue);
+      font-size: 28px;
+      margin-top: 0;
+      margin-bottom: 25px;
+      border-bottom: 3px solid var(--yellow);
+      padding-bottom: 10px;
+    }
+
+    .content-section h3 {
+      color: var(--pink);
+      font-size: 22px;
+      margin: 25px 0 15px 0;
+    }
+
+    .event-date {
+      background-color: #f0f5ff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      margin: 15px 0;
+      font-weight: bold;
+      border-left: 5px solid var(--blue);
+    }
+
+    .campaign-period {
+      background-color: #e8f5e8;
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border: 2px dashed #1f7a1f;
+    }
+
+    .instructions {
+      background-color: #fff9e6;
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border-left: 5px solid var(--yellow);
+    }
+
+    .legal-section {
+      background-color: #f8f8f8;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 30px;
+      font-size: 14px;
+      line-height: 1.6;
+      border-top: 3px solid #ccc;
+    }
+
+    .legal-notice {
+      font-style: italic;
+      color: #666;
+      margin: 15px 0;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+    }
+
+    .trademark-item {
+      margin: 10px 0;
+      padding-left: 15px;
+      border-left: 3px solid #ddd;
+    }
+
+    /* FOOTER */
+    .footer {
+      margin-top: 40px;
+      padding: 30px 20px;
+      background: #07154d;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.6;
+      opacity: 0.9;
+    }
+
+    @media (max-width: 768px) {
+      .campaign-image {
+        width: 95vw;
+        height: 60vh;
+      }
+      
+      .content-section {
+        padding: 20px;
+      }
+      
+      .content-section h2 {
+        font-size: 24px;
+      }
+      
+      .claim-btn {
+        padding: 14px 30px;
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">eFootball</div>
+    <div class="download-btn">DOWNLOAD</div>
+  </div>
+  
+  <div class="wrapper">
+    <section class="campaign">
+      <h1>100 MILLION DOWNLOAD CAMPAIGN</h1>
+      
+      <div class="campaign-grid">
+        <!-- Your image with updated styling -->
+        <img src="Image_4.jpeg" alt="Coins" class="campaign-image" />
+        
+        <!-- FIXED: Pink Claim Button now links to login.html -->
+        <a href="login.html" class="claim-btn">CLAIM HERE</a>
+        
+        <!-- Content Section -->
+        <div class="content-section">
+          <h2>eFootball™ Bonus Event!</h2>
+          
+          <div class="event-date">
+            <strong>2025/08/06</strong>
+          </div>
+          
+          <h3>CAMPAIGN</h3>
+          <p><strong>Announcement:</strong> "We are pleased to announce the commencement of The myClub Coins Giveaway, which is part of the eFootball™ 2025 Compensation Campaign."</p>
+          
+          <div class="campaign-period">
+            <strong>Season Period:</strong> 2025/08/06 02:00 - 2025/12/31 00:00 (UTC)
+          </div>
+          
+          <div class="instructions">
+            <strong>Instructions:</strong> To claim rewards, click "Log-in HERE", sign in with your eFootball™ account, and complete a short registration.
+          </div>
+          
+          <h3>Licensing and Legal Notices</h3>
+          
+          <div class="legal-notice">
+            <strong>Notice:</strong> "Do Not Sell My Personal Information" California Consumer Rights
+          </div>
+          
+          <div class="legal-section">
+            <div class="trademark-item">MLSPA (Major League Soccer Players Association)</div>
+            <div class="trademark-item">J.LEAGUE OFFICIALLY LICENSED PRODUCTS</div>
+            <div class="trademark-item">LIGA BBVA</div>
+            <div class="trademark-item">Adidas: The 3-Bars logo, the 3-Stripe trade mark, and Predator are registered trade marks of the Adidas Group, used with permission.</div>
+            <div class="trademark-item">FIFPRO: The use of certain player names, images and likenesses on a collective basis is authorised by FIFPRO Commercial Enterprises BV.</div>
+            <div class="trademark-item">© The Football Association Ltd 2023</div>
+            <div class="trademark-item">Official Licensee of the FIGC</div>
+            <div class="trademark-item">ALL RIGHTS RESERVED BY JFA</div>
+            <div class="trademark-item">Official Licensed Product of the RFEF</div>
+            <div class="trademark-item">© Ligue de Football Professionnel</div>
+            <div class="trademark-item">© 2023 THE ARSENAL FOOTBALL CLUB PLC</div>
+            <div class="trademark-item">UNREAL ENGINE</div>
+            <div class="trademark-item">PlayStation, PS5, PS4: Registered trademarks of Sony Interactive Entertainment Inc.</div>
+            <div class="trademark-item">Xbox, Xbox One: Trademarks of the Microsoft group of companies.</div>
+            <div class="trademark-item">Steam: Trademarks of Valve Corporation.</div>
+            <div class="trademark-item">CERO A (Rating)</div>
+            <div class="trademark-item">© Konami Digital Entertainment</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="footer">
+    <p>
+      Officially licensed products and trademarks belong to their respective owners.<br />
+      © Konami Digital Entertainment
+    </p>
+  </footer>
+
+  <script>
+    // Optional: If you want to keep some functionality before redirecting
+    // document.querySelector('.claim-btn').addEventListener('click', function(e) {
+    //   e.preventDefault(); // Prevent immediate redirect
+    //   alert('Redirecting to login page...');
+    //   setTimeout(() => {
+    //     window.location.href = 'login.html';
+    //   }, 1000);
+    // });
+  </script>
+</body>
+</html>

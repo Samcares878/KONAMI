@@ -172,3 +172,50 @@ body {
     color: #fff;
     text-decoration: underline;
 }
+/* Add these styles to your existing style.css file */
+
+/* Success icon animation */
+@keyframes successCheck {
+    0% { transform: scale(0.8); opacity: 0; }
+    70% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.success-icon {
+    animation: successCheck 0.6s ease-out forwards;
+}
+
+/* Fade-in animation for the message */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.confirmation-message, .next-steps {
+    animation: fadeInUp 0.5s ease-out 0.3s both;
+}
+
+.next-steps {
+    animation-delay: 0.5s;
+}
+
+/* Responsive adjustments for confirmation page */
+@media (max-width: 600px) {
+    .confirmation-container {
+        padding: 15px;
+    }
+    
+    .confirmation-message {
+        padding: 20px;
+    }
+    
+    .success-icon {
+        font-size: 3rem;
+    }
+}

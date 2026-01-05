@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claim Your Reward - efootball-officialkonami.net</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Using the same font as your login page -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles specific to confirmation page */
+        .confirmation-container {
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .success-icon {
+            font-size: 4rem;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        .confirmation-message {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 5px solid #4CAF50;
+            margin: 25px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .highlight-time {
+            color: #e2001a; /* Konami red */
+            font-weight: bold;
+            background-color: rgba(226, 0, 26, 0.1);
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        
+        .next-steps {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 25px;
+            text-align: left;
+        }
+        
+        .next-steps h3 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+        
+        .next-steps ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+        
+        .next-steps li {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        
+        .btn-back {
+            display: inline-block;
+            background-color: #333;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-back:hover {
+            background-color: #555;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Same top corner KONAMI box as your login page -->
+    <div class="top-corner-box">
+        <span class="konami-red">KONAMI</span>
+    </div>
+
+    <div class="login-container confirmation-container">
+        <!-- Success Icon -->
+        <div class="success-icon">✓</div>
+        
+        <!-- Main Confirmation Message -->
+        <div class="confirmation-message">
+            <h2 style="color: #333; margin-bottom: 15px;">Submission Successful!</h2>
+            <p style="font-size: 1.1rem; color: #444; line-height: 1.6;">
+                We have received your information, please check your inbox 
+                <span class="highlight-time">by 2:00 UTC</span> to claim the reward.
+            </p>
+        </div>
+        
+        <!-- Next Steps Information -->
+        <div class="next-steps">
+            <h3>What happens next?</h3>
+            <ul>
+                <li>Check the email address you provided</li>
+                <li>Look for an email from "KONAMI eFootball Team"</li>
+                <li>Follow the instructions in the email to claim your reward</li>
+                <li>If you don't see the email, check your spam folder</li>
+            </ul>
+        </div>
+        
+        <!-- Back to Login Button -->
+        <a href="index.html" class="btn-back">Back to Login</a>
+    </div>
+
+    <!-- Same footer as your login page -->
+    <footer class="page-footer">
+        <div class="footer-links">
+            <a href="#">Terms of Use / Privacy (KONAMI ID)</a>
+            <a href="#">Trademarks</a>
+            <a href="#">Support</a>
+            <a href="#">Company Information</a>
+        </div>
+    </footer>
+</body>
+</html>
