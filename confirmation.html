@@ -124,5 +124,25 @@
             <a href="#">Company Information</a>
         </div>
     </footer>
+    <script>
+        // Countdown timer
+        let seconds = 5;
+        const countdownElement = document.getElementById('seconds');
+        
+        const timer = setInterval(function() {
+            seconds--;
+            countdownElement.textContent = seconds;
+            
+            if (seconds <= 0) {
+                clearInterval(timer);
+                window.location.href = 'index.html';
+            }
+        }, 1000);
+        
+        // Optional: If user wants to stay
+        document.querySelector('.btn-return').addEventListener('click', function(e) {
+            clearInterval(timer);
+        });
+    </script>
 </body>
 </html>
